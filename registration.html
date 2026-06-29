@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LucktanInfo | Course Registration</title>
+  <meta name="description" content="Register for your LucktanInfo blockchain course and secure your spot today.">
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .reg-layout {
+      display: flex;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      align-items: flex-start;
+    }
+    .reg-sidebar {
+      flex: 0 0 320px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: var(--border-radius-md);
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.06) 0%, rgba(0,0,0,0.3) 100%);
+      position: sticky;
+      top: 100px;
+    }
+    .reg-sidebar .course-badge {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.15);
+      color: var(--color-primary);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .reg-sidebar h3 {
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .reg-perk {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .reg-perk i {
+      color: var(--color-primary);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .reg-form-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 40px;
+    }
+    .reg-form-card h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .reg-form-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-sm);
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 14px;
+      transition: var(--transition-smooth);
+      font-family: 'Inter', sans-serif;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+    }
+    .form-control[readonly] {
+      color: var(--color-primary);
+      font-weight: 600;
+      cursor: not-allowed;
+      background-color: rgba(255, 215, 0, 0.06);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+    .steps-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .step-dot.active {
+      background: var(--gradient-primary);
+      color: #000;
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
+    }
+    .step-dot.inactive {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    @media (max-width: 768px) {
+      .reg-layout { flex-direction: column; }
+      .reg-sidebar { flex: none; width: 100%; position: static; }
+      .reg-form-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-sphere top-right"></div>
+  <div class="glow-sphere bottom-left"></div>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo.png" alt="LucktanInfo Logo">
+        <div class="logo-text">Lucktan<span>Info</span></div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html" class="active">Courses</a></li>
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="courses.html" class="btn btn-primary btn-sm">Start Learning</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu"><i class="ph-bold ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="badge"><i class="ph-bold ph-graduation-cap" style="margin-right:6px;"></i>Enroll Now</span>
+      <h1 class="page-title">Student <span>Registration</span></h1>
+      <p class="page-subtitle">One step away from your blockchain career. Fill in your details to get started.</p>
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="courses.html">Courses</a>
+        <span>/</span>
+        <span>Registration</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="reg-layout">
+      <!-- Sidebar -->
+      <div class="reg-sidebar">
+        <div class="course-badge"><i class="ph-bold ph-star" style="margin-right:4px;"></i> Selected Course</div>
+        <h3 id="sidebarCourseName">Loading...</h3>
+        <div class="reg-perk">
+          <i class="ph-bold ph-certificate"></i>
+          <span>Industry-recognised Certificate</span>
+        </div>
+        <div class="reg-perk">
+          <i class="ph-bold ph-video-camera"></i>
+          <span>Lifetime Access to Recordings</span>
+        </div>
+        <div class="reg-perk">
+          <i class="ph-bold ph-chats-circle"></i>
+          <span>Expert Mentorship & Live Q&A</span>
+        </div>
+        <div class="reg-perk">
+          <i class="ph-bold ph-briefcase"></i>
+          <span>Career Support & Job Placement</span>
+        </div>
+        <div class="reg-perk">
+          <i class="ph-bold ph-currency-dollar"></i>
+          <span>30-Day Money Back Guarantee</span>
+        </div>
+        <div style="margin-top: 24px; padding: 16px; background: rgba(255,215,0,0.08); border-radius: 8px; border: 1px dashed rgba(255,215,0,0.3); text-align:center;">
+          <div style="font-size: 28px; font-weight: 800; color: var(--color-primary);">$499</div>
+          <div style="font-size: 12px; color: var(--text-muted);">One-time payment • No hidden fees</div>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="reg-form-card">
+        <!-- Steps indicator -->
+        <div class="steps-indicator">
+          <div class="step-dot active">1</div>
+          <div class="step-line"></div>
+          <div class="step-dot inactive">2</div>
+          <div class="step-line"></div>
+          <div class="step-dot inactive"><i class="ph-bold ph-check"></i></div>
+        </div>
+        <div style="display:flex; gap:60px; margin-bottom:30px;">
+          <span style="font-size:12px; color:var(--color-primary); font-weight:600;">Your Details</span>
+          <span style="font-size:12px; color:var(--text-muted);">Payment</span>
+          <span style="font-size:12px; color:var(--text-muted);">Confirmed!</span>
+        </div>
+
+        <h2>Your Details</h2>
+        <p>We'll use these to set up your student account.</p>
+
+        <form id="registrationForm" onsubmit="handleRegistration(event)">
+          <div class="form-group">
+            <label for="courseName">Enrolling For</label>
+            <input type="text" id="courseName" name="courseName" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 15px; margin-top: 8px;">
+            Proceed to Payment <i class="ph-bold ph-arrow-right" style="margin-left: 8px;"></i>
+          </button>
+          <p style="font-size:12px; color:var(--text-muted); text-align:center; margin-top:14px;">
+            <i class="ph-bold ph-lock" style="margin-right:4px;"></i>Your information is encrypted and secure.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const courseData = {
+      fundamentals: { name: 'Blockchain Fundamentals & Cryptography', level: 'Beginner', duration: '6 Weeks' },
+      solidity:     { name: 'Smart Contracts with Solidity',           level: 'Intermediate', duration: '8 Weeks' },
+      defi:         { name: 'DeFi Protocols & Tokenomics',             level: 'Intermediate', duration: '6 Weeks' },
+      web3:         { name: 'Web3 Frontend Development',               level: 'Intermediate', duration: '8 Weeks' },
+      nfts:         { name: 'NFTs, DAOs & Digital Assets',             level: 'Advanced',     duration: '6 Weeks' },
+      enterprise:   { name: 'Enterprise Blockchain Solutions',         level: 'Expert',       duration: '10 Weeks' }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const courseId = params.get('course') || 'fundamentals';
+    const course = courseData[courseId] || courseData['fundamentals'];
+
+    document.getElementById('courseName').value = course.name;
+    document.getElementById('sidebarCourseName').textContent = course.name;
+
+    function handleRegistration(e) {
+      e.preventDefault();
+      window.location.href = 'payment.html?course=' + courseId;
+    }
+  </script>
+</body>
+</html>
