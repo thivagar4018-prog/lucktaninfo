@@ -732,6 +732,44 @@
               </div>
             </div>
           </div>
+          <!-- Direct Card -->
+          <div class="gateway-card" data-gateway="direct_card" onclick="selectGateway('direct_card')" id="gatewayDirectCard">
+            <div class="gateway-radio"></div>
+            <div class="gateway-icon" style="background: rgba(255,215,0,0.1); color: var(--color-primary); border: 1px solid rgba(255,215,0,0.3);">
+              <i class="ph-bold ph-credit-card" style="font-size:24px;"></i>
+            </div>
+            <div class="gateway-info">
+              <div class="gateway-header">
+                <span class="gateway-name">Credit / Debit Card</span>
+              </div>
+              <p class="gateway-desc">Pay directly with Visa, Mastercard, RuPay, or Amex.</p>
+              <div class="gateway-methods">
+                <span class="method-pill"><i class="ph-bold ph-lock"></i> Secure Encrypted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Fields (shown only when Direct Card is selected) -->
+        <div class="card-fields" id="cardFields" style="display:none; margin-bottom: 24px; padding: 20px; border: 1px dashed rgba(255,215,0,0.2); border-radius: var(--border-radius-sm); background: rgba(0,0,0,0.2);">
+          <div style="margin-bottom: 16px;">
+            <label style="display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px;">Card Number</label>
+            <input type="text" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border-color); border-radius:6px; padding:12px; color:var(--text-primary); font-family:monospace;" placeholder="1234 5678 9012 3456" maxlength="19" oninput="this.value = this.value.replace(/\D/g, '').substring(0, 16).replace(/(.{4})/g, '$1 ').trim();">
+          </div>
+          <div style="display:flex; gap:12px; margin-bottom: 16px;">
+            <div style="flex:1;">
+              <label style="display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px;">Expiry</label>
+              <input type="text" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border-color); border-radius:6px; padding:12px; color:var(--text-primary); font-family:monospace;" placeholder="MM / YY" maxlength="7">
+            </div>
+            <div style="flex:1;">
+              <label style="display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px;">CVV</label>
+              <input type="password" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border-color); border-radius:6px; padding:12px; color:var(--text-primary); font-family:monospace;" placeholder="•••" maxlength="3">
+            </div>
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px;">Name on Card</label>
+            <input type="text" style="width:100%; background:rgba(255,255,255,0.04); border:1px solid var(--border-color); border-radius:6px; padding:12px; color:var(--text-primary);" placeholder="John Doe">
+          </div>
         </div>
 
         <!-- Pay Button -->
@@ -850,7 +888,7 @@
     }
 
     // ─── Gateway Selection ───
-    const gatewayNames = { cashfree: 'Cashfree', payu: 'PayU', pinelabs: 'Pine Labs' };
+    const gatewayNames = { cashfree: 'Cashfree', payu: 'PayU', pinelabs: 'Pine Labs', direct_card: 'Credit/Debit Card' };
     let currentGateway = 'cashfree';
 
     function selectGateway(gateway) {
@@ -861,6 +899,9 @@
       document.querySelectorAll('.gateway-card').forEach(card => {
         card.classList.toggle('selected', card.dataset.gateway === gateway);
       });
+
+      // Show/hide direct card fields
+      document.getElementById('cardFields').style.display = (gateway === 'direct_card') ? 'block' : 'none';
 
       // Update pay button
       document.getElementById('payBtnGateway').textContent = gatewayNames[gateway];
