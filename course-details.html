@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LucktanInfo | Course Details</title>
+  <meta name="description" content="Explore the full curriculum, learning outcomes, and instructor for this LucktanInfo blockchain course before you enroll.">
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .details-layout {
+      display: flex;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      align-items: flex-start;
+    }
+    .details-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .details-sidebar {
+      flex: 0 0 320px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: var(--border-radius-md);
+      padding: 32px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.06) 0%, rgba(0,0,0,0.3) 100%);
+      position: sticky;
+      top: 100px;
+    }
+    .details-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 36px;
+      margin-bottom: 28px;
+    }
+    .details-card h2 {
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .details-meta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .details-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .details-meta-chip i { color: var(--color-primary); font-size: 14px; }
+    .details-intro {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .learn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .learn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .learn-item i { color: var(--color-success); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .curriculum-module {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-sm);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.015);
+    }
+    .curriculum-module-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .curriculum-module-head h4 {
+      font-size: 15px;
+      margin: 0;
+      color: var(--text-primary);
+    }
+    .curriculum-module-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255,215,0,0.12);
+      color: var(--color-primary);
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+    .curriculum-module-week {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .curriculum-module p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 8px 0 0 36px;
+      line-height: 1.6;
+    }
+    .instructor-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .instructor-row img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,215,0,0.3);
+    }
+    .instructor-row h4 { font-size: 16px; margin-bottom: 2px; }
+    .instructor-row .role { font-size: 13px; color: var(--color-primary); margin-bottom: 6px; }
+    .instructor-row p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .details-sidebar .price-box {
+      text-align: center;
+      padding: 16px;
+      background: rgba(255,215,0,0.08);
+      border-radius: 8px;
+      border: 1px dashed rgba(255,215,0,0.3);
+      margin-bottom: 24px;
+    }
+    .details-sidebar .price-box .price { font-size: 30px; font-weight: 800; color: var(--color-primary); }
+    .details-sidebar .price-box .note { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .reg-perk {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .reg-perk i { color: var(--color-primary); font-size: 18px; flex-shrink: 0; }
+    @media (max-width: 768px) {
+      .details-layout { flex-direction: column; }
+      .details-sidebar { flex: none; width: 100%; position: static; order: -1; }
+      .details-card { padding: 24px; }
+      .learn-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-sphere top-right"></div>
+  <div class="glow-sphere bottom-left"></div>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo.png" alt="LucktanInfo Logo">
+        <div class="logo-text">Lucktan<span>Info</span></div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html" class="active">Courses</a></li>
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="courses.html" class="btn btn-primary btn-sm">Start Learning</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu"><i class="ph-bold ph-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="badge" id="diffBadge"><i class="ph-bold ph-graduation-cap" style="margin-right:6px;"></i>Course Details</span>
+      <h1 class="page-title" id="courseTitle">Loading...</h1>
+      <p class="page-subtitle" id="courseTagline"></p>
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="courses.html">Courses</a>
+        <span>/</span>
+        <span id="breadcrumbCourse">Details</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="details-layout">
+
+      <!-- Main content -->
+      <div class="details-main">
+
+        <!-- Overview -->
+        <div class="details-card">
+          <h2>Overview</h2>
+          <div class="details-meta-row" id="metaRow"></div>
+          <p class="details-intro" id="courseIntro"></p>
+        </div>
+
+        <!-- What you'll learn -->
+        <div class="details-card">
+          <h2>What You'll Learn</h2>
+          <div class="learn-grid" id="learnGrid"></div>
+        </div>
+
+        <!-- Curriculum -->
+        <div class="details-card">
+          <h2>Course Curriculum</h2>
+          <div id="curriculumList"></div>
+        </div>
+
+        <!-- Instructor -->
+        <div class="details-card">
+          <h2>Your Instructor</h2>
+          <div class="instructor-row">
+            <img id="instructorImg" src="" alt="">
+            <div>
+              <h4 id="instructorName"></h4>
+              <div class="role" id="instructorRole"></div>
+              <p id="instructorDesc"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="details-sidebar">
+        <div class="course-badge" style="display:inline-block;background:rgba(255,215,0,0.15);color:var(--color-primary);border:1px solid rgba(255,215,0,0.3);border-radius:30px;padding:6px 16px;font-size:12px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.5px;">
+          <i class="ph-bold ph-star" style="margin-right:4px;"></i> This Course Includes
+        </div>
+        <div class="reg-perk"><i class="ph-bold ph-certificate"></i><span>Industry-recognised Certificate</span></div>
+        <div class="reg-perk"><i class="ph-bold ph-video-camera"></i><span>Lifetime Access to Recordings</span></div>
+        <div class="reg-perk"><i class="ph-bold ph-chats-circle"></i><span>Expert Mentorship &amp; Live Q&amp;A</span></div>
+        <div class="reg-perk"><i class="ph-bold ph-briefcase"></i><span>Career Support &amp; Job Placement</span></div>
+        <div class="reg-perk"><i class="ph-bold ph-currency-dollar"></i><span>30-Day Money Back Guarantee</span></div>
+        <div class="price-box" style="margin-top:20px;">
+          <div class="price">$499</div>
+          <div class="note">One-time payment • No hidden fees</div>
+        </div>
+        <a href="#" id="enrollBtn" class="btn btn-primary" style="width:100%; padding:16px; font-size:15px; text-align:center; display:block;">
+          Continue to Registration <i class="ph-bold ph-arrow-right" style="margin-left: 6px;"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const courseData = {
+      fundamentals: {
+        name: 'Blockchain Fundamentals & Cryptography',
+        level: 'Beginner',
+        duration: '6 Weeks',
+        tagline: 'Build a rock-solid foundation in distributed ledgers and cryptography before moving into smart contracts.',
+        intro: 'This course takes you from zero to a confident understanding of how blockchains actually work under the hood. You will explore distributed ledger architecture, SHA-256 hashing, Merkle trees, and the consensus mechanisms (Proof of Work and Proof of Stake) that keep decentralized networks secure. By the end, you will be able to read a whitepaper, reason about trade-offs between blockchain designs, and be fully prepared for our Solidity and DeFi tracks.',
+        learn: [
+          'How distributed ledgers achieve consensus without a central authority',
+          'SHA-256 hashing and Merkle tree structures',
+          'Proof of Work vs Proof of Stake trade-offs',
+          'Wallets, public/private key cryptography, and digital signatures',
+          'Reading and evaluating real blockchain whitepapers',
+          'Foundations needed for smart contract development'
+        ],
+        curriculum: [
+          { title: 'Introduction to Distributed Ledgers', week: 'Week 1', desc: 'What a blockchain is, why it matters, and how nodes reach agreement.' },
+          { title: 'Cryptographic Hashing & Merkle Trees', week: 'Week 2', desc: 'SHA-256, hash pointers, and how blocks link immutably.' },
+          { title: 'Consensus Mechanisms', week: 'Week 3', desc: 'Proof of Work, Proof of Stake, and emerging consensus models.' },
+          { title: 'Keys, Wallets & Digital Signatures', week: 'Week 4', desc: 'Public/private key pairs, signing transactions, wallet security.' },
+          { title: 'Reading Whitepapers', week: 'Week 5', desc: 'Deconstructing Bitcoin and Ethereum whitepapers section by section.' },
+          { title: 'Capstone Project & Certification', week: 'Week 6', desc: 'Final assessment and project review with mentor feedback.' }
+        ],
+        instructor: 'arjun'
+      },
+      solidity: {
+        name: 'Smart Contracts with Solidity',
+        level: 'Intermediate',
+        duration: '8 Weeks',
+        tagline: 'Write, test, audit, and deploy production-grade smart contracts on EVM networks.',
+        intro: 'Go hands-on with Solidity, the dominant language for Ethereum-compatible smart contracts. You will build, test, and deploy contracts using Hardhat and Truffle, learn to integrate audited OpenZeppelin libraries, and pick up the security mindset needed to avoid the bugs that have cost real projects millions. This course is project-driven from week one.',
+        learn: [
+          'Solidity syntax, data types, and contract structure',
+          'Building and testing contracts with Hardhat & Truffle',
+          'Using OpenZeppelin libraries for secure, audited code',
+          'Common vulnerabilities: reentrancy, overflow, access control',
+          'Gas optimization techniques',
+          'Deploying contracts to testnets and mainnet'
+        ],
+        curriculum: [
+          { title: 'Solidity Fundamentals', week: 'Week 1-2', desc: 'Variables, functions, modifiers, and contract structure.' },
+          { title: 'Hardhat & Truffle Workflows', week: 'Week 3', desc: 'Local development, testing, and deployment pipelines.' },
+          { title: 'OpenZeppelin & Secure Patterns', week: 'Week 4', desc: 'Using battle-tested libraries for tokens, access control, and upgrades.' },
+          { title: 'Security & Common Exploits', week: 'Week 5-6', desc: 'Reentrancy, integer overflow, front-running, and how to prevent them.' },
+          { title: 'Gas Optimization', week: 'Week 7', desc: 'Writing efficient, cost-effective contract code.' },
+          { title: 'Capstone: Deploy to Mainnet', week: 'Week 8', desc: 'Ship a real contract with mentor code review.' }
+        ],
+        instructor: 'priya'
+      },
+      defi: {
+        name: 'DeFi Protocols & Tokenomics',
+        level: 'Intermediate',
+        duration: '6 Weeks',
+        tagline: 'Understand the mechanics and economics that power decentralized finance.',
+        intro: 'DeFi has rebuilt lending, trading, and asset management without banks. In this course you will dissect how automated market makers price assets, how liquidity pools and yield farming generate (and risk) returns, and how governance tokens let communities run protocols. You will leave with the analytical tools to evaluate any DeFi protocol critically.',
+        learn: [
+          'How automated market makers (AMMs) set prices',
+          'Liquidity pools, impermanent loss, and yield farming',
+          'Staking mechanisms and reward design',
+          'Governance tokens and on-chain voting',
+          'Tokenomics: supply, incentives, and sustainability',
+          'Evaluating real-world DeFi protocols critically'
+        ],
+        curriculum: [
+          { title: 'DeFi Landscape Overview', week: 'Week 1', desc: 'Lending, DEXs, derivatives, and how they replace traditional finance.' },
+          { title: 'Automated Market Makers', week: 'Week 2', desc: 'Constant product formulas, slippage, and price impact.' },
+          { title: 'Liquidity Pools & Yield Farming', week: 'Week 3', desc: 'Providing liquidity, impermanent loss, and farming strategies.' },
+          { title: 'Staking & Governance', week: 'Week 4', desc: 'Token-based voting, treasury management, and proposals.' },
+          { title: 'Tokenomics Design', week: 'Week 5', desc: 'Supply schedules, incentive alignment, and sustainability analysis.' },
+          { title: 'Capstone: Protocol Teardown', week: 'Week 6', desc: 'Analyze a live DeFi protocol end-to-end.' }
+        ],
+        instructor: 'vikram'
+      },
+      web3: {
+        name: 'Web3 Frontend Development',
+        level: 'Intermediate',
+        duration: '8 Weeks',
+        tagline: 'Build complete decentralized applications with React, Ethers.js, and wallet integrations.',
+        intro: 'Smart contracts need interfaces. This course teaches you to build full decentralized applications (dApps) using React, connect to smart contracts with Ethers.js, integrate MetaMask wallet authentication, store files on IPFS, and pull real-world data on-chain using Chainlink oracles. You will ship a working dApp by the end of the course.',
+        learn: [
+          'Connecting React apps to the blockchain with Ethers.js',
+          'MetaMask wallet integration and transaction signing',
+          'Reading and writing smart contract state from the frontend',
+          'Decentralized file storage using IPFS',
+          'Pulling real-world data on-chain with Chainlink oracles',
+          'Shipping a complete, deployed dApp'
+        ],
+        curriculum: [
+          { title: 'React for Web3', week: 'Week 1-2', desc: 'Project setup, component architecture, and state management for dApps.' },
+          { title: 'Ethers.js & Contract Calls', week: 'Week 3', desc: 'Reading and writing on-chain data from the frontend.' },
+          { title: 'Wallet Integration', week: 'Week 4', desc: 'MetaMask connection flows, signing, and network switching.' },
+          { title: 'IPFS & Decentralized Storage', week: 'Week 5', desc: 'Storing and retrieving files in a decentralized way.' },
+          { title: 'Chainlink Oracles', week: 'Week 6-7', desc: 'Bringing real-world data on-chain reliably.' },
+          { title: 'Capstone: Ship a dApp', week: 'Week 8', desc: 'Deploy a complete decentralized application.' }
+        ],
+        instructor: 'vikram'
+      },
+      nfts: {
+        name: 'NFTs, DAOs & Digital Assets',
+        level: 'Advanced',
+        duration: '6 Weeks',
+        tagline: 'Create NFT collections, design DAO governance, and understand digital asset legal frameworks.',
+        intro: 'This advanced course covers the full lifecycle of digital assets: building ERC-721 and ERC-1155 NFT collections, structuring DAOs with on-chain voting and treasury controls, and navigating the legal and intellectual property questions that come with tokenized assets. You will design and deploy a working NFT collection with DAO-style governance attached.',
+        learn: [
+          'ERC-721 vs ERC-1155 standards and when to use each',
+          'Minting, metadata, and on-chain/off-chain storage trade-offs',
+          'Designing DAO governance structures',
+          'Implementing on-chain voting mechanisms',
+          'Treasury management for decentralized organizations',
+          'Legal and IP considerations for digital assets'
+        ],
+        curriculum: [
+          { title: 'NFT Standards Deep Dive', week: 'Week 1', desc: 'ERC-721, ERC-1155, and metadata strategies.' },
+          { title: 'Minting & Marketplaces', week: 'Week 2', desc: 'Building a minting contract and marketplace integration.' },
+          { title: 'DAO Architecture', week: 'Week 3', desc: 'Governance models, proposal systems, and treasury design.' },
+          { title: 'On-Chain Voting', week: 'Week 4', desc: 'Implementing transparent, tamper-proof voting mechanisms.' },
+          { title: 'Legal & IP Frameworks', week: 'Week 5', desc: 'Ownership rights, licensing, and regulatory considerations.' },
+          { title: 'Capstone: NFT + DAO Launch', week: 'Week 6', desc: 'Deploy a collection with attached governance.' }
+        ],
+        instructor: 'priya'
+      },
+      enterprise: {
+        name: 'Enterprise Blockchain Solutions',
+        level: 'Expert',
+        duration: '10 Weeks',
+        tagline: 'Architect private consortium blockchains for real enterprise use cases.',
+        intro: 'Enterprises need permissioned, scalable blockchain infrastructure that public chains were not designed for. This expert-level course teaches you to architect private and consortium blockchains using Hyperledger Fabric, design supply chain traceability systems, build digital identity protocols, and integrate blockchain into existing enterprise systems. This is the most in-depth course in our curriculum.',
+        learn: [
+          'Hyperledger Fabric architecture and channel design',
+          'Designing permissioned, consortium-based networks',
+          'Supply chain traceability system design',
+          'Digital identity and credential protocols',
+          'Integrating blockchain with existing enterprise systems',
+          'Scalability and governance for private networks'
+        ],
+        curriculum: [
+          { title: 'Hyperledger Fabric Fundamentals', week: 'Week 1-2', desc: 'Architecture, channels, ordering services, and chaincode.' },
+          { title: 'Consortium Network Design', week: 'Week 3-4', desc: 'Permissioning, membership services, and governance models.' },
+          { title: 'Supply Chain Traceability', week: 'Week 5-6', desc: 'End-to-end provenance tracking system design.' },
+          { title: 'Digital Identity Protocols', week: 'Week 7', desc: 'Verifiable credentials and identity management on-chain.' },
+          { title: 'Enterprise System Integration', week: 'Week 8-9', desc: 'Connecting blockchain layers to existing ERP/CRM systems.' },
+          { title: 'Capstone: Enterprise Architecture Review', week: 'Week 10', desc: 'Design and present a full enterprise blockchain solution.' }
+        ],
+        instructor: 'arjun'
+      }
+    };
+
+    const instructors = {
+      arjun: {
+        name: 'Arjun Sharma',
+        role: 'Lead Blockchain Instructor',
+        img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+        desc: 'Solidity specialist with expertise in EVM architecture, on-chain data analysis, and DeFi protocol design. Deployed 50+ smart contracts on mainnet.'
+      },
+      vikram: {
+        name: 'Vikram Singh',
+        role: 'Web3 Backend Engineer',
+        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
+        desc: 'Builder of decentralized application backends, IPFS integrations, and cross-chain bridge architectures. Core contributor to two open-source Web3 projects.'
+      },
+      priya: {
+        name: 'Priya Nair',
+        role: 'Smart Contract Security Auditor',
+        img: 'images/expert-priya.png',
+        desc: 'Expert in Solidity security patterns, reentrancy mitigation, gas optimisation, and formal verification of DeFi protocols.'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const courseId = params.get('course') || 'fundamentals';
+    const course = courseData[courseId] || courseData['fundamentals'];
+    const instructor = instructors[course.instructor];
+
+    document.title = 'LucktanInfo | ' + course.name;
+    document.getElementById('courseTitle').textContent = course.name;
+    document.getElementById('courseTagline').textContent = course.tagline;
+    document.getElementById('breadcrumbCourse').textContent = course.name;
+    document.getElementById('diffBadge').innerHTML = '<i class="ph-bold ph-graduation-cap" style="margin-right:6px;"></i>' + course.level + ' Course';
+    document.getElementById('courseIntro').textContent = course.intro;
+
+    document.getElementById('metaRow').innerHTML =
+      '<span class="details-meta-chip"><i class="ph-bold ph-chart-bar"></i>' + course.level + '</span>' +
+      '<span class="details-meta-chip"><i class="ph-bold ph-clock"></i>' + course.duration + '</span>' +
+      '<span class="details-meta-chip"><i class="ph-bold ph-certificate"></i>Certificate Included</span>' +
+      '<span class="details-meta-chip"><i class="ph-bold ph-laptop"></i>Self-Paced Online</span>';
+
+    document.getElementById('learnGrid').innerHTML = course.learn.map(item =>
+      '<div class="learn-item"><i class="ph-bold ph-check-circle"></i><span>' + item + '</span></div>'
+    ).join('');
+
+    document.getElementById('curriculumList').innerHTML = course.curriculum.map((mod, i) =>
+      '<div class="curriculum-module">' +
+        '<div class="curriculum-module-head">' +
+          '<h4><span class="curriculum-module-num">' + (i + 1) + '</span>' + mod.title + '</h4>' +
+          '<span class="curriculum-module-week">' + mod.week + '</span>' +
+        '</div>' +
+        '<p>' + mod.desc + '</p>' +
+      '</div>'
+    ).join('');
+
+    document.getElementById('instructorImg').src = instructor.img;
+    document.getElementById('instructorImg').alt = instructor.name;
+    document.getElementById('instructorName').textContent = instructor.name;
+    document.getElementById('instructorRole').textContent = instructor.role;
+    document.getElementById('instructorDesc').textContent = instructor.desc;
+
+    document.getElementById('enrollBtn').href = 'registration.html?course=' + courseId;
+  </script>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

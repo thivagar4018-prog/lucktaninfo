@@ -1,0 +1,9 @@
+{
+  "name": "lucktaninfo",
+  "version": "1.0.0",
+  "description": "LucktanInfo Blockchain Course Website",
+  "scripts": {
+    "start": "npx -y serve -l 8080 .",
+    "dev": "npx -y serve -l 8080 ."
+  }
+}
