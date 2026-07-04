@@ -1,4 +1,4 @@
-$port = 3000
+$port = 8080
 $root = $PSScriptRoot
 $dataDir = Join-Path $root "data"
 if (!(Test-Path $dataDir)) { New-Item -ItemType Directory -Path $dataDir | Out-Null }
@@ -140,6 +140,63 @@ while ($listener.IsListening) {
                     $body = [System.Text.Encoding]::UTF8.GetBytes($resBody)
                     $response.OutputStream.Write($body, 0, $body.Length)
                     Write-Host "200 GET /api/btc-price" -ForegroundColor Green
+                }
+                elseif ($rawUrl -eq "/api/create-order" -and $request.HttpMethod -eq "POST") {
+                    $payload = $bodyText | ConvertFrom-Json
+                    $orderId = if ($payload.orderId) { $payload.orderId } else { "LTI-" + (Get-Date -Format "yyyyMMddHHmmss") }
+                    
+                    $order = [PSCustomObject]@{
+                        orderId   = $orderId
+                        gateway   = $payload.gateway
+                        amount    = $payload.amount
+                        currency  = $payload.currency
+                        courseId  = $payload.courseId
+                        customer  = $payload.customerName
+                        email     = $payload.customerEmail
+                        phone     = $payload.customerPhone
+                        status    = "CREATED"
+                        demo      = $true
+                    }
+                    Save-Submission "payments.json" $order
+                    
+                    # Return a demo session (no real gateway session since no API keys configured)
+                    $resBody = @{
+                        status           = "success"
+                        orderId          = $orderId
+                        gateway          = $payload.gateway
+                        demo             = $true
+                        paymentSessionId = "demo_session_$orderId"
+                        message          = "Order created in demo mode"
+                    } | ConvertTo-Json
+                    $body = [System.Text.Encoding]::UTF8.GetBytes($resBody)
+                    $response.OutputStream.Write($body, 0, $body.Length)
+                    Write-Host "200 POST /api/create-order [$($payload.gateway)] $orderId" -ForegroundColor Green
+                }
+                elseif ($rawUrl -eq "/api/verify-payment" -and $request.HttpMethod -eq "POST") {
+                    $payload = $bodyText | ConvertFrom-Json
+                    
+                    $payment = [PSCustomObject]@{
+                        orderId       = $payload.orderId
+                        transactionId = $payload.transactionId
+                        gateway       = $payload.gateway
+                        amount        = $payload.amount
+                        currency      = $payload.currency
+                        status        = $payload.status
+                        demo          = $payload.demo
+                        course        = $payload.course
+                        studentName   = if ($payload.student) { $payload.student.name } else { "" }
+                        studentEmail  = if ($payload.student) { $payload.student.email } else { "" }
+                    }
+                    Save-Submission "payments.json" $payment
+                    
+                    $resBody = @{
+                        status  = "success"
+                        message = "Payment verified and recorded"
+                        orderId = $payload.orderId
+                    } | ConvertTo-Json
+                    $body = [System.Text.Encoding]::UTF8.GetBytes($resBody)
+                    $response.OutputStream.Write($body, 0, $body.Length)
+                    Write-Host "200 POST /api/verify-payment [$($payload.gateway)] $($payload.orderId) - $($payload.status)" -ForegroundColor Green
                 }
                 else {
                     $response.StatusCode = 404
