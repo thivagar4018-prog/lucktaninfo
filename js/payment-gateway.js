@@ -14,6 +14,13 @@ const PaymentGateway = (() => {
       appId: '', // Set your Cashfree App ID here
       enabled: true
     },
+    razorpay: {
+      name: 'Razorpay',
+      sdkUrl: 'https://checkout.razorpay.com/v1/checkout.js',
+      sandbox: true,
+      keyId: '', // Set your Razorpay Key ID here
+      enabled: true
+    },
     payu: {
       name: 'PayU',
       sdkUrl: 'https://jssdk.payu.in/bolt/bolt.min.js',
@@ -60,6 +67,7 @@ const PaymentGateway = (() => {
     if (!cfg) return true;
     switch (gateway) {
       case 'cashfree': return !cfg.appId;
+      case 'razorpay': return !cfg.keyId;
       case 'payu': return !cfg.merchantKey;
       case 'pinelabs': return !cfg.merchantId;
       default: return true;
@@ -229,6 +237,59 @@ const PaymentGateway = (() => {
     }
   }
 
+  // ─── Razorpay Integration ───
+  async function initRazorpay(orderId) {
+    if (isDemoMode('razorpay')) {
+      return simulatePayment('razorpay', orderId, handlePaymentSuccess, handlePaymentFailure);
+    }
+
+    try {
+      const response = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gateway: 'razorpay',
+          orderId: orderId,
+          amount: getAmount().amount,
+          currency: selectedCurrency,
+          customerName: studentInfo?.name || 'Student',
+          customerEmail: studentInfo?.email || '',
+          customerPhone: studentInfo?.phone || '',
+          courseId: courseInfo?.id || 'fundamentals'
+        })
+      });
+      const data = await response.json();
+
+      if (data.rzpOrderId && typeof Razorpay !== 'undefined') {
+        const options = {
+          key: CONFIG.razorpay.keyId,
+          amount: (getAmount().amount * 100).toString(),
+          currency: selectedCurrency,
+          name: 'LucktanInfo',
+          description: courseInfo?.name || 'Blockchain Course',
+          order_id: data.rzpOrderId,
+          handler: function (response) {
+            handlePaymentSuccess({ ...response, gateway: 'razorpay', orderId, transactionId: response.razorpay_payment_id });
+          },
+          prefill: {
+            name: studentInfo?.name || '',
+            email: studentInfo?.email || '',
+            contact: studentInfo?.phone || ''
+          },
+          theme: { color: '#ffd700' }
+        };
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+          handlePaymentFailure({ ...response.error, gateway: 'razorpay', orderId });
+        });
+        rzp.open();
+      }
+    } catch (err) {
+      console.error('Razorpay init error:', err);
+      simulatePayment('razorpay', orderId, handlePaymentSuccess, handlePaymentFailure);
+    }
+  }
+
   // ─── Payment Callbacks ───
   function handlePaymentSuccess(data) {
     console.log('Payment Success:', data);
@@ -316,6 +377,8 @@ const PaymentGateway = (() => {
       switch (gateway) {
         case 'cashfree':
           return initCashfree(orderId);
+        case 'razorpay':
+          return initRazorpay(orderId);
         case 'payu':
           return initPayU(orderId);
         case 'pinelabs':

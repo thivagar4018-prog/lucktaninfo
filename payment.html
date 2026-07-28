@@ -690,6 +690,25 @@
             </div>
           </div>
 
+          <!-- Razorpay -->
+          <div class="gateway-card" data-gateway="razorpay" onclick="selectGateway('razorpay')" id="gatewayRazorpay">
+            <div class="gateway-radio"></div>
+            <div class="gateway-icon" style="background: rgba(51, 153, 204, 0.1); color: #3399cc; border: 1px solid rgba(51, 153, 204, 0.3);">
+              <i class="ph-bold ph-lightning" style="font-size:24px;"></i>
+            </div>
+            <div class="gateway-info">
+              <div class="gateway-header">
+                <span class="gateway-name">Razorpay</span>
+              </div>
+              <p class="gateway-desc">Fast, secure, and reliable payments with Razorpay Checkout.</p>
+              <div class="gateway-methods">
+                <span class="method-pill"><i class="ph-bold ph-credit-card"></i> Cards</span>
+                <span class="method-pill"><i class="ph-bold ph-device-mobile"></i> UPI</span>
+                <span class="method-pill"><i class="ph-bold ph-bank"></i> Netbanking</span>
+              </div>
+            </div>
+          </div>
+
           <!-- PayU -->
           <div class="gateway-card" data-gateway="payu" onclick="selectGateway('payu')" id="gatewayPayu">
             <div class="gateway-radio"></div>
@@ -888,7 +907,7 @@
     }
 
     // ─── Gateway Selection ───
-    const gatewayNames = { cashfree: 'Cashfree', payu: 'PayU', pinelabs: 'Pine Labs', direct_card: 'Credit/Debit Card' };
+    const gatewayNames = { cashfree: 'Cashfree', razorpay: 'Razorpay', payu: 'PayU', pinelabs: 'Pine Labs', direct_card: 'Credit/Debit Card' };
     let currentGateway = 'cashfree';
 
     function selectGateway(gateway) {
